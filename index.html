@@ -8,67 +8,114 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+
 body{
 font-family:Arial,sans-serif;
 background:linear-gradient(135deg,#fff0f5,#eee7ff);
 color:#333;min-height:100vh
 }
+
 header{
-background:white;padding:22px;text-align:center;
+background:#fff;padding:22px;text-align:center;
 box-shadow:0 3px 15px #00000010
 }
 header h1{color:#8b5cf6;font-size:30px}
 header p{color:#777;margin-top:8px}
-.hero{text-align:center;padding:45px 18px 25px}
-.hero h2{font-size:30px;color:#6d28d9}
+
+.hero{text-align:center;padding:40px 15px 20px}
+.hero h2{font-size:29px;color:#6d28d9}
 .hero p{margin:12px;color:#777}
+
 .search{
 display:flex;gap:8px;max-width:500px;
 margin:20px auto
 }
-input,textarea{
+
+input,textarea,select{
 width:100%;padding:13px;border:2px solid #ddd6fe;
-border-radius:12px;outline:none;font:inherit
+border-radius:12px;outline:none;font:inherit;
+background:white;margin:7px 0
 }
-.search button,.action{
+
+button{
 border:0;background:#8b5cf6;color:white;
-padding:13px 20px;border-radius:12px;cursor:pointer
+padding:13px 18px;border-radius:12px;
+cursor:pointer;font-size:14px
 }
+
 .tools{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:18px;padding:22px;max-width:1000px;margin:auto
+grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
+gap:15px;padding:20px;max-width:1050px;margin:auto
 }
+
 .card{
-background:white;padding:25px;border-radius:18px;
+background:white;padding:20px 12px;border-radius:18px;
 text-align:center;box-shadow:0 5px 20px #00000010;
-cursor:pointer;transition:.2s;border:2px solid transparent
+cursor:pointer;transition:.2s;
+border:2px solid transparent
 }
-.card:hover{transform:translateY(-5px);border-color:#c4b5fd}
-.card h3{color:#7c3aed;margin:12px 0}
-.card p{color:#777;font-size:14px}
+
+.card:hover{transform:translateY(-4px);border-color:#c4b5fd}
+.card .emoji{font-size:32px}
+.card h3{color:#7c3aed;margin:10px 0;font-size:16px}
+.card p{color:#777;font-size:12px;line-height:1.5}
+
+.section-title{
+text-align:center;color:#6d28d9;
+margin:25px 0 5px;font-size:21px
+}
+
 .panel{
 display:none;background:white;padding:22px;
 margin:15px auto 30px;max-width:650px;
-border-radius:20px;box-shadow:0 5px 20px #00000012
+width:92%;border-radius:20px;
+box-shadow:0 5px 20px #00000012
 }
+
 .panel h2{color:#7c3aed;margin-bottom:15px}
-.panel textarea{min-height:110px;margin:12px 0;resize:vertical}
+.panel textarea{min-height:110px;resize:vertical}
+
 .output{
 background:#f5f0ff;padding:15px;border-radius:12px;
-margin-top:15px;white-space:pre-wrap;overflow-wrap:anywhere;
-display:none;line-height:1.6
+margin-top:15px;white-space:pre-wrap;
+overflow-wrap:anywhere;display:none;line-height:1.6
 }
+
 .close{
-float:right;border:0;background:#eee;color:#555;
-padding:8px 12px;border-radius:8px;cursor:pointer
+float:right;background:#eee;color:#555;padding:8px 12px
 }
-#result{text-align:center;color:#7c3aed;padding:10px}
-footer{text-align:center;padding:25px;color:#777}
-button:active{transform:scale(.97)}
+
+.filebox{
+border:2px dashed #c4b5fd;
+padding:25px;text-align:center;border-radius:15px;
+background:#faf7ff;margin:15px 0
+}
+
+.filebox input{border:0}
+
+.preview{
+max-width:100%;max-height:250px;
+border-radius:12px;margin:12px auto;display:none
+}
+
+.info{
+background:#f5f0ff;padding:12px;border-radius:12px;
+margin:12px 0;font-size:14px;line-height:1.6
+}
+
+.action{margin-top:10px;width:100%}
+.download{
+display:none;background:#16a34a;
+width:100%;margin-top:12px
+}
+
+footer{text-align:center;padding:25px;color:#777;line-height:2}
+
 @media(max-width:400px){
-.hero h2{font-size:25px}
-.tools{grid-template-columns:1fr}
+.hero h2{font-size:24px}
+.tools{grid-template-columns:repeat(2,1fr);gap:10px;padding:12px}
+.card{padding:17px 8px}
 }
 </style>
 </head>
@@ -77,121 +124,461 @@ button:active{transform:scale(.97)}
 
 <header>
 <h1>✨ QuickGenius</h1>
-<p>Your Smart Digital World</p>
+<p>Your Smart Digital World 💜</p>
 </header>
 
 <section class="hero">
 <h2>Think Smart. Work Fast.</h2>
-<p>Discover useful tools to make your daily work easier.</p>
+<p>One platform. Many useful tools.</p>
+
 <div class="search">
-<input id="searchBox" placeholder="Search your tools...">
+<input id="searchBox" placeholder="🔍 Search your tools...">
 <button onclick="searchTools()">Search</button>
 </div>
 </section>
 
+<h3 class="section-title">🌸 Image Tools</h3>
+
 <section class="tools">
 
-<div class="card" onclick="location.href='assistant.html'">
-<h3>🤖 AI Assistant</h3>
-<p>Open your AI chat assistant.</p>
+<div class="card" onclick="openTool('compress')">
+<div class="emoji">🗜️</div>
+<h3>Image Compressor</h3>
+<p>Reduce image file size.</p>
 </div>
 
-<div class="card" onclick="openTool('text')">
-<h3>📝 Text Generator</h3>
-<p>Create captions, messages and text.</p>
+<div class="card" onclick="openTool('convert')">
+<div class="emoji">🔄</div>
+<h3>Image Converter</h3>
+<p>JPG, PNG, WEBP formats.</p>
 </div>
 
-<div class="card" onclick="openTool('study')">
-<h3>📚 Study Helper</h3>
-<p>Generate a simple study plan.</p>
+<div class="card" onclick="openTool('resize')">
+<div class="emoji">📐</div>
+<h3>Image Resizer</h3>
+<p>Change image dimensions.</p>
 </div>
 
-<div class="card" onclick="openTool('idea')">
-<h3>💡 Idea Generator</h3>
-<p>Discover creative ideas.</p>
-</div>
-
-<div class="card" onclick="openTool('website')">
-<h3>🌐 Website Creator</h3>
-<p>Generate a basic HTML website.</p>
-</div>
-
-<div class="card" onclick="openTool('smart')">
-<h3>✨ Smart Tools</h3>
-<p>Use useful productivity tools.</p>
+<div class="card" onclick="openTool('crop')">
+<div class="emoji">✂️</div>
+<h3>Image Preview</h3>
+<p>Preview your uploaded image.</p>
 </div>
 
 </section>
 
-<p id="result"></p>
+<h3 class="section-title">🤖 AI & Creative Tools</h3>
+
+<section class="tools">
+
+<div class="card" onclick="location.href='assistant.html'">
+<div class="emoji">🤖</div>
+<h3>AI Assistant</h3>
+<p>Open AI chat assistant.</p>
+</div>
+
+<div class="card" onclick="openTool('text')">
+<div class="emoji">📝</div>
+<h3>Text Generator</h3>
+<p>Create captions and messages.</p>
+</div>
+
+<div class="card" onclick="openTool('idea')">
+<div class="emoji">💡</div>
+<h3>Idea Generator</h3>
+<p>Find creative ideas.</p>
+</div>
+
+<div class="card" onclick="openTool('website')">
+<div class="emoji">🌐</div>
+<h3>Website Creator</h3>
+<p>Create starter HTML code.</p>
+</div>
+
+</section>
+
+<h3 class="section-title">📚 Student Tools</h3>
+
+<section class="tools">
+
+<div class="card" onclick="openTool('study')">
+<div class="emoji">📖</div>
+<h3>Study Helper</h3>
+<p>Make a study plan.</p>
+</div>
+
+<div class="card" onclick="openTool('smart')">
+<div class="emoji">✨</div>
+<h3>Word Counter</h3>
+<p>Count words and characters.</p>
+</div>
+
+<div class="card" onclick="openTool('percentage')">
+<div class="emoji">🧮</div>
+<h3>Percentage</h3>
+<p>Calculate percentage.</p>
+</div>
+
+</section>
+
+<p id="result" style="text-align:center;color:#7c3aed"></p>
 
 <section class="panel" id="panel">
+
 <button class="close" onclick="closeTool()">✕ Close</button>
+
 <h2 id="toolTitle">QuickGenius Tool</h2>
-<p id="toolDescription">Enter your details below.</p>
-<textarea id="toolInput" placeholder="Type here..."></textarea>
-<button class="action" onclick="runTool()">Generate</button>
+<p id="toolDescription">Choose your options.</p>
+
+<div id="imageArea" style="display:none">
+
+<div class="filebox">
+📁 Select your image
+<input type="file" id="imageFile" accept="image/*">
+</div>
+
+<img id="preview" class="preview">
+
+<p id="fileInfo" class="info" style="display:none"></p>
+
+<div id="compressSettings" style="display:none">
+<label>Target image quality</label>
+<input type="range" id="quality" min="10" max="95" value="75">
+<p id="qualityValue">Quality: 75%</p>
+
+<label>Output Format</label>
+<select id="compressFormat">
+<option value="image/jpeg">JPG</option>
+<option value="image/webp">WEBP</option>
+<option value="image/png">PNG</option>
+</select>
+</div>
+
+<div id="resizeSettings" style="display:none">
+<label>Width (pixels)</label>
+<input type="number" id="imgWidth" placeholder="Enter width">
+
+<label>Height (pixels)</label>
+<input type="number" id="imgHeight" placeholder="Enter height">
+
+<label><input type="checkbox" id="keepRatio" checked style="width:auto"> Keep aspect ratio</label>
+</div>
+
+<div id="convertSettings" style="display:none">
+<label>Select output format</label>
+<select id="convertFormat">
+<option value="image/png">PNG</option>
+<option value="image/jpeg">JPG</option>
+<option value="image/webp">WEBP</option>
+</select>
+</div>
+
+<button class="action" id="processBtn" onclick="processImage()">
+Process Image ✨
+</button>
+
+<div id="imageResult" class="info" style="display:none"></div>
+
+<button class="download" id="downloadBtn" onclick="downloadImage()">
+⬇ Download Image
+</button>
+
+</div>
+
+<div id="textArea" style="display:none">
+<textarea id="toolInput" placeholder="Enter something here..."></textarea>
+<button class="action" onclick="runTool()">Generate ✨</button>
+</div>
+
 <div class="output" id="output"></div>
+
 </section>
 
 <footer>
 <p>Made with 💜 for a smarter tomorrow.</p>
-<p>Created by Shivangi Prajapati</p>
+<p><b>Created by Shivangi Prajapati</b></p>
 <p>© 2026 QuickGenius</p>
 </footer>
 
 <script>
-let currentTool = "";
 
-function searchTools(){
-let query=document.getElementById("searchBox").value.toLowerCase();
-let cards=document.querySelectorAll(".card");
-let found=0;
+let currentTool="";
+let selectedImage=null;
+let processedBlob=null;
+let processedName="quickgenius-image";
 
-cards.forEach(card=>{
-let match=card.innerText.toLowerCase().includes(query);
-card.style.display=match?"block":"none";
-if(match)found++;
-});
+const imageTools=["compress","convert","resize","crop"];
 
-document.getElementById("result").innerText=
-found+" tools found";
-}
-
-document.getElementById("searchBox").addEventListener("input",searchTools);
-
-function openTool(type){
-currentTool=type;
-let titles={
+const titles={
+compress:"🗜️ Image Compressor",
+convert:"🔄 Image Converter",
+resize:"📐 Image Resizer",
+crop:"✂️ Image Preview",
 text:"📝 Text Generator",
 study:"📚 Study Helper",
 idea:"💡 Idea Generator",
 website:"🌐 Website Creator",
-smart:"✨ Smart Tools"
+smart:"✨ Word Counter",
+percentage:"🧮 Percentage Calculator"
 };
-let descriptions={
-text:"Enter a topic to create a sample caption or message.",
+
+const descriptions={
+compress:"Reduce your image file size while maintaining good quality.",
+convert:"Convert your image into another format.",
+resize:"Change image dimensions easily.",
+crop:"Upload and preview your image.",
+text:"Enter a topic to create a sample caption.",
 study:"Enter your subject or topic.",
 idea:"Enter a category for creative ideas.",
 website:"Enter your website name.",
-smart:"Enter text to count its words and characters."
+smart:"Enter text to count words and characters.",
+percentage:"Enter obtained marks and total marks."
 };
+
+function openTool(type){
+
+currentTool=type;
 
 document.getElementById("toolTitle").innerText=titles[type];
 document.getElementById("toolDescription").innerText=descriptions[type];
-document.getElementById("toolInput").value="";
-document.getElementById("output").style.display="none";
+
 document.getElementById("panel").style.display="block";
+document.getElementById("imageArea").style.display=
+imageTools.includes(type)?"block":"none";
+
+document.getElementById("textArea").style.display=
+imageTools.includes(type)?"none":"block";
+
+document.getElementById("output").style.display="none";
+document.getElementById("imageResult").style.display="none";
+document.getElementById("downloadBtn").style.display="none";
+
+document.getElementById("compressSettings").style.display=
+type==="compress"?"block":"none";
+
+document.getElementById("convertSettings").style.display=
+type==="convert"?"block":"none";
+
+document.getElementById("resizeSettings").style.display=
+type==="resize"?"block":"none";
+
+document.getElementById("toolInput").value="";
+
+selectedImage=null;
+processedBlob=null;
+
+document.getElementById("imageFile").value="";
+document.getElementById("preview").style.display="none";
+document.getElementById("fileInfo").style.display="none";
+
 document.getElementById("panel").scrollIntoView({behavior:"smooth"});
+
 }
 
 function closeTool(){
 document.getElementById("panel").style.display="none";
 }
 
+document.getElementById("imageFile").addEventListener("change",function(){
+
+const file=this.files[0];
+
+if(!file)return;
+
+if(!file.type.startsWith("image/")){
+alert("Please select a valid image.");
+return;
+}
+
+selectedImage=file;
+processedBlob=null;
+
+document.getElementById("downloadBtn").style.display="none";
+
+const url=URL.createObjectURL(file);
+const preview=document.getElementById("preview");
+
+preview.src=url;
+preview.style.display="block";
+
+document.getElementById("fileInfo").style.display="block";
+document.getElementById("fileInfo").innerText=
+"Original size: "+formatSize(file.size)+
+"\nFile name: "+file.name;
+
+});
+
+document.getElementById("quality").addEventListener("input",function(){
+document.getElementById("qualityValue").innerText=
+"Quality: "+this.value+"%";
+});
+
+function formatSize(bytes){
+
+if(bytes<1024)return bytes+" Bytes";
+if(bytes<1048576)return (bytes/1024).toFixed(2)+" KB";
+if(bytes<1073741824)return (bytes/1048576).toFixed(2)+" MB";
+
+return (bytes/1073741824).toFixed(2)+" GB";
+
+}
+
+function loadImage(file){
+
+return new Promise((resolve,reject)=>{
+
+const url=URL.createObjectURL(file);
+const img=new Image();
+
+img.onload=()=>{
+URL.revokeObjectURL(url);
+resolve(img);
+};
+
+img.onerror=()=>{
+URL.revokeObjectURL(url);
+reject(new Error("Could not load image."));
+};
+
+img.src=url;
+
+});
+
+}
+
+async function processImage(){
+
+if(!selectedImage){
+alert("Please select an image first!");
+return;
+}
+
+const btn=document.getElementById("processBtn");
+btn.disabled=true;
+btn.innerText="Processing...";
+
+try{
+
+const img=await loadImage(selectedImage);
+
+let width=img.naturalWidth;
+let height=img.naturalHeight;
+
+if(currentTool==="resize"){
+
+width=parseInt(document.getElementById("imgWidth").value)||width;
+height=parseInt(document.getElementById("imgHeight").value)||height;
+
+if(width<1||height<1||width>12000||height>12000){
+throw new Error("Enter dimensions between 1 and 12000 pixels.");
+}
+
+if(document.getElementById("keepRatio").checked){
+
+const ratio=img.naturalWidth/img.naturalHeight;
+
+if(document.getElementById("imgWidth").value){
+height=Math.round(width/ratio);
+}else{
+width=Math.round(height*ratio);
+}
+
+}
+
+}
+
+if(currentTool==="crop"){
+
+document.getElementById("imageResult").innerText=
+"Image preview loaded successfully!\nDimensions: "+width+" × "+height;
+
+document.getElementById("imageResult").style.display="block";
+return;
+
+}
+
+const canvas=document.createElement("canvas");
+canvas.width=width;
+canvas.height=height;
+
+const ctx=canvas.getContext("2d");
+
+const format=currentTool==="compress"?
+document.getElementById("compressFormat").value:
+currentTool==="convert"?
+document.getElementById("convertFormat").value:
+selectedImage.type;
+
+if(format==="image/jpeg"){
+ctx.fillStyle="#ffffff";
+ctx.fillRect(0,0,width,height);
+}
+
+ctx.drawImage(img,0,0,width,height);
+
+const quality=currentTool==="compress"?
+Number(document.getElementById("quality").value)/100:0.85;
+
+processedBlob=await new Promise((resolve,reject)=>{
+
+canvas.toBlob(blob=>{
+if(blob)resolve(blob);
+else reject(new Error("Image conversion failed."));
+},format,quality);
+
+});
+
+if(!processedBlob)throw new Error("Could not process image.");
+
+const originalSize=selectedImage.size;
+const newSize=processedBlob.size;
+
+document.getElementById("imageResult").innerText=
+"✨ Processing Complete!\n\n"+
+"Original: "+formatSize(originalSize)+
+"\nNew Size: "+formatSize(newSize)+
+"\nDimensions: "+width+" × "+height+
+"\n\n"+(newSize<originalSize?
+"Size reduced by "+((1-newSize/originalSize)*100).toFixed(1)+"%":
+"New file is not smaller than the original.");
+
+document.getElementById("imageResult").style.display="block";
+document.getElementById("downloadBtn").style.display="block";
+
+}
+
+catch(error){
+alert(error.message||"Something went wrong.");
+}
+
+finally{
+btn.disabled=false;
+btn.innerText="Process Image ✨";
+}
+
+}
+
+function downloadImage(){
+
+if(!processedBlob)return;
+
+const extension=processedBlob.type.split("/")[1].replace("jpeg","jpg");
+
+const url=URL.createObjectURL(processedBlob);
+const a=document.createElement("a");
+
+a.href=url;
+a.download=processedName+"."+extension;
+a.click();
+
+setTimeout(()=>URL.revokeObjectURL(url),1000);
+
+}
+
 function runTool(){
-let value=document.getElementById("toolInput").value.trim();
-let output=document.getElementById("output");
+
+const value=document.getElementById("toolInput").value.trim();
+const output=document.getElementById("output");
 
 if(!value){
 alert("Please enter something first!");
@@ -201,35 +588,87 @@ return;
 let answer="";
 
 if(currentTool==="text"){
+
 answer="✨ Sample Caption\n\nDiscover something beautiful every day! 💜\n\nTopic: "+value+
-"\n\nThis is a demo template. Connect an AI service for custom generated text.";
+"\n\nDemo template. Connect an AI service for custom AI-generated text.";
+
 }
 
 else if(currentTool==="study"){
+
 answer="📚 Your Study Plan\n\nTopic: "+value+
-"\n\n1. Understand the basic concepts.\n2. Read your notes.\n3. Practice important questions.\n4. Solve one practice test.\n5. Revise what you learned.\n\nKeep learning! 💜";
+"\n\n1. Understand basic concepts.\n2. Read your notes.\n3. Practice important questions.\n4. Solve a practice test.\n5. Revise everything.\n\nKeep learning! 💜";
+
 }
 
 else if(currentTool==="idea"){
+
 answer="💡 Creative Ideas for: "+value+
-"\n\n1. Make an educational video.\n2. Create an aesthetic poster.\n3. Write a short story.\n4. Build a small project.\n5. Create a useful tutorial.\n\nThese are sample ideas.";
+"\n\n1. Make an educational video.\n2. Create an aesthetic poster.\n3. Write a short story.\n4. Build a small project.\n5. Create a tutorial.";
+
 }
 
 else if(currentTool==="website"){
-let safeName=value.replace(/[<>&"']/g,"");
-answer="Your starter HTML website:\n\n<!DOCTYPE html>\n<html>\n<head>\n<title>"+safeName+"</title>\n</head>\n<body>\n<h1>Welcome to "+safeName+"</h1>\n<p>My first website!</p>\n</body>\n</html>";
+
+let name=value.replace(/[<>&"']/g,"");
+
+answer="Your starter HTML:\n\n<!DOCTYPE html>\n<html>\n<head>\n<title>"+name+"</title>\n</head>\n<body>\n<h1>Welcome to "+name+"</h1>\n<p>My first website!</p>\n</body>\n</html>";
+
 }
 
 else if(currentTool==="smart"){
-let words=value.trim().split(/\s+/).length;
+
+let words=value.split(/\s+/).length;
+
 answer="✨ Text Statistics\n\nWords: "+words+
 "\nCharacters: "+value.length+
 "\nCharacters without spaces: "+value.replace(/\s/g,"").length;
+
+}
+
+else if(currentTool==="percentage"){
+
+const numbers=value.split(/[,\s]+/).map(Number);
+
+if(numbers.length!==2||numbers.some(n=>!Number.isFinite(n))||numbers[1]<=0){
+alert("Enter obtained marks and total marks, e.g. 450, 500");
+return;
+}
+
+answer="🧮 Percentage Result\n\nObtained Marks: "+numbers[0]+
+"\nTotal Marks: "+numbers[1]+
+"\nPercentage: "+(numbers[0]/numbers[1]*100).toFixed(2)+"%";
+
 }
 
 output.innerText=answer;
 output.style.display="block";
+
 }
+
+function searchTools(){
+
+let query=document.getElementById("searchBox").value.toLowerCase();
+let cards=document.querySelectorAll(".card");
+let found=0;
+
+cards.forEach(card=>{
+
+let match=card.innerText.toLowerCase().includes(query);
+
+card.style.display=match?"block":"none";
+
+if(match)found++;
+
+});
+
+document.getElementById("result").innerText=
+found+" tools found";
+
+}
+
+document.getElementById("searchBox").addEventListener("input",searchTools);
+
 </script>
 
 </body>
