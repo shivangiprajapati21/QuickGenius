@@ -2,204 +2,236 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuickGenius</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuickGenius - Smart Digital World</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #fff0f5, #eee7ff);
-            color: #333;
-            min-height: 100vh;
-        }
-
-        header {
-            padding: 22px;
-            text-align: center;
-            background: white;
-            box-shadow: 0 3px 15px #00000010;
-        }
-
-        header h1 {
-            color: #8b5cf6;
-            font-size: 30px;
-        }
-
-        header p {
-            margin-top: 8px;
-            color: #777;
-        }
-
-        .hero {
-            text-align: center;
-            padding: 55px 20px 30px;
-        }
-
-        .hero h2 {
-            font-size: 32px;
-            color: #6d28d9;
-        }
-
-        .hero p {
-            margin: 15px 0;
-            color: #666;
-        }
-
-        .search {
-            margin: 20px auto;
-            max-width: 500px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .search input {
-            flex: 1;
-            padding: 14px;
-            border: 2px solid #ddd6fe;
-            border-radius: 12px;
-            outline: none;
-            min-width: 0;
-        }
-
-        .search button {
-            padding: 14px 20px;
-            border: none;
-            border-radius: 12px;
-            background: #8b5cf6;
-            color: white;
-        }
-
-        .tools {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 18px;
-            padding: 25px;
-            max-width: 1000px;
-            margin: auto;
-        }
-
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 18px;
-            text-align: center;
-            box-shadow: 0 5px 20px #00000010;
-        }
-
-        .card h3 {
-            color: #7c3aed;
-            margin: 12px 0;
-        }
-
-        .card p {
-            color: #777;
-            font-size: 14px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 25px;
-            color: #777;
-        }
-
-        #result {
-            text-align: center;
-            padding: 10px;
-            color: #6d28d9;
-        }
-    </style>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#fff0f5,#eee7ff);
+color:#333;min-height:100vh
+}
+header{
+background:white;padding:22px;text-align:center;
+box-shadow:0 3px 15px #00000010
+}
+header h1{color:#8b5cf6;font-size:30px}
+header p{color:#777;margin-top:8px}
+.hero{text-align:center;padding:45px 18px 25px}
+.hero h2{font-size:30px;color:#6d28d9}
+.hero p{margin:12px;color:#777}
+.search{
+display:flex;gap:8px;max-width:500px;
+margin:20px auto
+}
+input,textarea{
+width:100%;padding:13px;border:2px solid #ddd6fe;
+border-radius:12px;outline:none;font:inherit
+}
+.search button,.action{
+border:0;background:#8b5cf6;color:white;
+padding:13px 20px;border-radius:12px;cursor:pointer
+}
+.tools{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:18px;padding:22px;max-width:1000px;margin:auto
+}
+.card{
+background:white;padding:25px;border-radius:18px;
+text-align:center;box-shadow:0 5px 20px #00000010;
+cursor:pointer;transition:.2s;border:2px solid transparent
+}
+.card:hover{transform:translateY(-5px);border-color:#c4b5fd}
+.card h3{color:#7c3aed;margin:12px 0}
+.card p{color:#777;font-size:14px}
+.panel{
+display:none;background:white;padding:22px;
+margin:15px auto 30px;max-width:650px;
+border-radius:20px;box-shadow:0 5px 20px #00000012
+}
+.panel h2{color:#7c3aed;margin-bottom:15px}
+.panel textarea{min-height:110px;margin:12px 0;resize:vertical}
+.output{
+background:#f5f0ff;padding:15px;border-radius:12px;
+margin-top:15px;white-space:pre-wrap;overflow-wrap:anywhere;
+display:none;line-height:1.6
+}
+.close{
+float:right;border:0;background:#eee;color:#555;
+padding:8px 12px;border-radius:8px;cursor:pointer
+}
+#result{text-align:center;color:#7c3aed;padding:10px}
+footer{text-align:center;padding:25px;color:#777}
+button:active{transform:scale(.97)}
+@media(max-width:400px){
+.hero h2{font-size:25px}
+.tools{grid-template-columns:1fr}
+}
+</style>
 </head>
 
 <body>
 
 <header>
-    <h1>✨ QuickGenius</h1>
-    <p>Your Smart Digital World</p>
+<h1>✨ QuickGenius</h1>
+<p>Your Smart Digital World</p>
 </header>
 
 <section class="hero">
-    <h2>Think Smart. Work Fast.</h2>
-    <p>Discover useful tools to make your daily work easier.</p>
-
-    <div class="search">
-        <input type="text" id="searchBox"
-        placeholder="Search your tools...">
-
-        <button onclick="searchTools()">Search</button>
-    </div>
+<h2>Think Smart. Work Fast.</h2>
+<p>Discover useful tools to make your daily work easier.</p>
+<div class="search">
+<input id="searchBox" placeholder="Search your tools...">
+<button onclick="searchTools()">Search</button>
+</div>
 </section>
 
-<section class="tools" id="tools">
+<section class="tools">
 
-    <div class="card">
-        <h3>🤖 AI Assistant</h3>
-        <p>Your smart AI helper.</p>
-    </div>
+<div class="card" onclick="location.href='assistant.html'">
+<h3>🤖 AI Assistant</h3>
+<p>Open your AI chat assistant.</p>
+</div>
 
-    <div class="card">
-        <h3>📝 Text Generator</h3>
-        <p>Create creative text and ideas.</p>
-    </div>
+<div class="card" onclick="openTool('text')">
+<h3>📝 Text Generator</h3>
+<p>Create captions, messages and text.</p>
+</div>
 
-    <div class="card">
-        <h3>📚 Study Helper</h3>
-        <p>Make learning easier and smarter.</p>
-    </div>
+<div class="card" onclick="openTool('study')">
+<h3>📚 Study Helper</h3>
+<p>Generate a simple study plan.</p>
+</div>
 
-    <div class="card">
-        <h3>💡 Idea Generator</h3>
-        <p>Discover new and creative ideas.</p>
-    </div>
+<div class="card" onclick="openTool('idea')">
+<h3>💡 Idea Generator</h3>
+<p>Discover creative ideas.</p>
+</div>
 
-    <div class="card">
-        <h3>🌐 Website Creator</h3>
-        <p>Explore website building ideas.</p>
-    </div>
+<div class="card" onclick="openTool('website')">
+<h3>🌐 Website Creator</h3>
+<p>Generate a basic HTML website.</p>
+</div>
 
-    <div class="card">
-        <h3>✨ Smart Tools</h3>
-        <p>Explore your digital productivity tools.</p>
-    </div>
+<div class="card" onclick="openTool('smart')">
+<h3>✨ Smart Tools</h3>
+<p>Use useful productivity tools.</p>
+</div>
 
 </section>
 
 <p id="result"></p>
 
+<section class="panel" id="panel">
+<button class="close" onclick="closeTool()">✕ Close</button>
+<h2 id="toolTitle">QuickGenius Tool</h2>
+<p id="toolDescription">Enter your details below.</p>
+<textarea id="toolInput" placeholder="Type here..."></textarea>
+<button class="action" onclick="runTool()">Generate</button>
+<div class="output" id="output"></div>
+</section>
+
 <footer>
-    <p>Made with 💜 for a smarter tomorrow.</p>
-    <p>Created by Shivangi Prajapati</p>
-    <p>© 2026 QuickGenius</p>
+<p>Made with 💜 for a smarter tomorrow.</p>
+<p>Created by Shivangi Prajapati</p>
+<p>© 2026 QuickGenius</p>
 </footer>
 
 <script>
-    function searchTools() {
-        let query = document
-            .getElementById("searchBox")
-            .value.toLowerCase();
+let currentTool = "";
 
-        let cards = document.querySelectorAll(".card");
-        let found = 0;
+function searchTools(){
+let query=document.getElementById("searchBox").value.toLowerCase();
+let cards=document.querySelectorAll(".card");
+let found=0;
 
-        cards.forEach(card => {
-            if (card.innerText.toLowerCase().includes(query)) {
-                card.style.display = "block";
-                found++;
-            } else {
-                card.style.display = "none";
-            }
-        });
+cards.forEach(card=>{
+let match=card.innerText.toLowerCase().includes(query);
+card.style.display=match?"block":"none";
+if(match)found++;
+});
 
-        document.getElementById("result").innerText =
-            found + " tools found";
-    }
+document.getElementById("result").innerText=
+found+" tools found";
+}
+
+document.getElementById("searchBox").addEventListener("input",searchTools);
+
+function openTool(type){
+currentTool=type;
+let titles={
+text:"📝 Text Generator",
+study:"📚 Study Helper",
+idea:"💡 Idea Generator",
+website:"🌐 Website Creator",
+smart:"✨ Smart Tools"
+};
+let descriptions={
+text:"Enter a topic to create a sample caption or message.",
+study:"Enter your subject or topic.",
+idea:"Enter a category for creative ideas.",
+website:"Enter your website name.",
+smart:"Enter text to count its words and characters."
+};
+
+document.getElementById("toolTitle").innerText=titles[type];
+document.getElementById("toolDescription").innerText=descriptions[type];
+document.getElementById("toolInput").value="";
+document.getElementById("output").style.display="none";
+document.getElementById("panel").style.display="block";
+document.getElementById("panel").scrollIntoView({behavior:"smooth"});
+}
+
+function closeTool(){
+document.getElementById("panel").style.display="none";
+}
+
+function runTool(){
+let value=document.getElementById("toolInput").value.trim();
+let output=document.getElementById("output");
+
+if(!value){
+alert("Please enter something first!");
+return;
+}
+
+let answer="";
+
+if(currentTool==="text"){
+answer="✨ Sample Caption\n\nDiscover something beautiful every day! 💜\n\nTopic: "+value+
+"\n\nThis is a demo template. Connect an AI service for custom generated text.";
+}
+
+else if(currentTool==="study"){
+answer="📚 Your Study Plan\n\nTopic: "+value+
+"\n\n1. Understand the basic concepts.\n2. Read your notes.\n3. Practice important questions.\n4. Solve one practice test.\n5. Revise what you learned.\n\nKeep learning! 💜";
+}
+
+else if(currentTool==="idea"){
+answer="💡 Creative Ideas for: "+value+
+"\n\n1. Make an educational video.\n2. Create an aesthetic poster.\n3. Write a short story.\n4. Build a small project.\n5. Create a useful tutorial.\n\nThese are sample ideas.";
+}
+
+else if(currentTool==="website"){
+let safeName=value.replace(/[<>&"']/g,"");
+answer="Your starter HTML website:\n\n<!DOCTYPE html>\n<html>\n<head>\n<title>"+safeName+"</title>\n</head>\n<body>\n<h1>Welcome to "+safeName+"</h1>\n<p>My first website!</p>\n</body>\n</html>";
+}
+
+else if(currentTool==="smart"){
+let words=value.trim().split(/\s+/).length;
+answer="✨ Text Statistics\n\nWords: "+words+
+"\nCharacters: "+value.length+
+"\nCharacters without spaces: "+value.replace(/\s/g,"").length;
+}
+
+output.innerText=answer;
+output.style.display="block";
+}
 </script>
 
 </body>
-</html>
+    </html>
+    
